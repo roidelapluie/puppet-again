@@ -18,16 +18,16 @@
 # NOTE: see ../again.pp for the delta code
 
 # NOTE: splitting this into a separate file didn't work properly in this module
-define common::again::delta(
+define again::again::delta(
 	$delta = 0,
 	# start timer counting now! (default is to start when puppet finishes!)
 	$start_timer_now = false
 ) {
-	include common::vardir
-	include common::again
+	include again::vardir
+	include again::again
 
-	#$vardir = $::common::vardir::module_vardir	# with trailing slash
-	$vardir = regsubst($::common::vardir::module_vardir, '\/$', '')
+	#$vardir = $::again::vardir::module_vardir	# with trailing slash
+	$vardir = regsubst($::again::vardir::module_vardir, '\/$', '')
 
 	$valid_delta = inline_template('<%= [Fixnum, String].include?(@delta.class) ? @delta.to_i : 0 %>')
 

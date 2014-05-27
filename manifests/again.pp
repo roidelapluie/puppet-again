@@ -15,12 +15,12 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class common::again {
+class again::again {
 
-	include common::vardir
+	include again::vardir
 
-	#$vardir = $::common::vardir::module_vardir	# with trailing slash
-	$vardir = regsubst($::common::vardir::module_vardir, '\/$', '')
+	#$vardir = $::again::vardir::module_vardir	# with trailing slash
+	$vardir = regsubst($::again::vardir::module_vardir, '\/$', '')
 
 	# store 'again' specific code in a separate directory
 	file { "${vardir}/again/":
@@ -37,7 +37,7 @@ class common::again {
 		# pass in some variables if we decide we would like a
 		# way to get values in other than via command line...
 		# we could pass in some environ data or other data...
-		content => template('common/again/again.py.erb'),
+		content => template('again/again/again.py.erb'),
 		owner => root,
 		group => root,
 		mode => 754,	# if you're not root, you can't run it!
@@ -55,16 +55,16 @@ class common::again {
 }
 
 ## NOTE: splitting this into a separate file didn't work properly in this module
-#define common::again::delta(
+#define again::again::delta(
 #	$delta = 0,
 #	# start timer counting now! (default is to start when puppet finishes!)
 #	$start_timer_now = false
 #) {
-#	include common::vardir
-#	include common::again
+#	include again::vardir
+#	include again::again
 
-#	#$vardir = $::common::vardir::module_vardir	# with trailing slash
-#	$vardir = regsubst($::common::vardir::module_vardir, '\/$', '')
+#	#$vardir = $::again::vardir::module_vardir	# with trailing slash
+#	$vardir = regsubst($::again::vardir::module_vardir, '\/$', '')
 
 #	$valid_start_timer_now = $start_timer_now ? {
 #		true => '--start-timer-now',
